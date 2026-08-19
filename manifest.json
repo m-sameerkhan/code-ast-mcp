@@ -31,23 +31,23 @@
   "tools": [
     {
       "name": "analyze_file_ast",
-      "description": "Parse a Python file and return a structured AST outline including imports, classes, functions, variables, and docstrings."
+      "description": "Parse a Python file using Python's AST parser and return a detailed outline of its docstrings, imports, top-level classes, functions, variables, and line counts."
     },
     {
       "name": "find_class_methods",
-      "description": "Locate a specific class within a Python file and retrieve all its method signatures, type annotations, line numbers, and docstrings."
+      "description": "Locate a specific class within a Python file and retrieve all its methods, argument signatures, type annotations, line numbers, and docstrings."
     },
     {
       "name": "find_symbol",
-      "description": "Recursively search a directory or file for classes, functions, methods, or variables matching a target symbol name."
+      "description": "Recursively search a directory or file for classes, functions, methods, or variables matching the target symbol name."
     },
     {
       "name": "get_imports_graph",
-      "description": "Scan all Python files in a directory to build an import dependency map and output a Mermaid diagram."
+      "description": "Scan all Python files in a directory to build an import dependency graph and output both a structured map and a Mermaid diagram definition."
     },
     {
       "name": "find_missing_docstrings",
-      "description": "Audit Python files in a directory to identify modules, classes, and functions that lack docstrings, and calculate overall docstring coverage percentage."
+      "description": "Audit Python files in a directory to identify modules, classes, and functions that lack docstrings, calculating overall docstring coverage percentage."
     }
   ],
   "tools_generated": true,
