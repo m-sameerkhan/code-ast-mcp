@@ -1,0 +1,116 @@
+{
+  "serverInfo": {
+    "name": "code-ast-mcp",
+    "version": "0.1.0",
+    "description": "A Python AST Codebase Architecture & Symbol Inspector MCP Server"
+  },
+  "authentication": {
+    "required": false
+  },
+  "tools": [
+    {
+      "name": "analyze_file_ast",
+      "description": "Parse a Python file using Python's AST parser and return a detailed outline of its docstrings, imports, top-level classes, functions, variables, and line counts.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "file_path": {
+            "type": "string",
+            "description": "Path to the Python (.py) file to analyze."
+          }
+        },
+        "required": ["file_path"]
+      }
+    },
+    {
+      "name": "find_class_methods",
+      "description": "Locate a specific class within a Python file and retrieve all its methods, argument signatures, type annotations, line numbers, and docstrings.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "file_path": {
+            "type": "string",
+            "description": "Path to the Python file containing the class."
+          },
+          "class_name": {
+            "type": "string",
+            "description": "Name of the target class to inspect."
+          }
+        },
+        "required": ["file_path", "class_name"]
+      }
+    },
+    {
+      "name": "find_symbol",
+      "description": "Recursively search a directory or file for classes, functions, methods, or variables matching the target symbol name.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "target_dir": {
+            "type": "string",
+            "description": "Directory path or file path to search."
+          },
+          "symbol_name": {
+            "type": "string",
+            "description": "Name or partial name of the symbol to search for."
+          }
+        },
+        "required": ["target_dir", "symbol_name"]
+      }
+    },
+    {
+      "name": "get_imports_graph",
+      "description": "Scan all Python files in a directory to build an import dependency graph and output both a structured map and a Mermaid diagram definition.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "target_dir": {
+            "type": "string",
+            "description": "Path to the directory containing Python files."
+          }
+        },
+        "required": ["target_dir"]
+      }
+    },
+    {
+      "name": "find_missing_docstrings",
+      "description": "Audit Python files in a directory to identify modules, classes, and functions that lack docstrings, calculating overall docstring coverage percentage.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "target_dir": {
+            "type": "string",
+            "description": "Directory path to audit."
+          },
+          "include_private": {
+            "type": "boolean",
+            "description": "Whether to include private functions/methods (starting with '_').",
+            "default": false
+          }
+        },
+        "required": ["target_dir"]
+      }
+    }
+  ],
+  "resources": [
+    {
+      "uri": "codeast://stats",
+      "name": "Workspace AST Statistics",
+      "description": "Provide high-level AST statistics for the current workspace.",
+      "mimeType": "application/json"
+    }
+  ],
+  "prompts": [
+    {
+      "name": "refactor_code_summary",
+      "description": "Generate a prompt guiding the LLM to inspect the AST outline of a Python file and provide actionable code refactoring, architectural, and documentation advice.",
+      "arguments": [
+        {
+          "name": "file_path",
+          "description": "Path to the target Python file for refactoring review.",
+          "required": true
+        }
+      ]
+    }
+  ]
+}
