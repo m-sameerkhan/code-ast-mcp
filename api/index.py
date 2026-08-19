@@ -8,15 +8,26 @@ app = mcp.sse_app()
 
 SERVER_CARD_PATH = Path(__file__).parent.parent / ".well-known" / "mcp" / "server-card.json"
 
+# Extract the core SSE endpoint function from FastMCP's routes
+sse_endpoint_handler = app.routes[0].endpoint
 
-async def root_handler(request):
+
+async def root_dispatch(request):
+    """
+    Handle root URL requests:
+    If client requests SSE (Accept: text/event-stream), serve the SSE stream directly.
+    Otherwise, return JSON status metadata.
+    """
+    accept_header = request.headers.get("accept", "")
+    if "text/event-stream" in accept_header:
+        return await sse_endpoint_handler(request)
     return JSONResponse({
         "name": "code-ast-mcp",
         "version": "0.1.0",
         "status": "online",
         "transport": "SSE",
         "sse_endpoint": "/sse",
-        "messages_endpoint": "/messages/"
+        "messages_endpoint": "/messages"
     })
 
 
@@ -28,6 +39,6 @@ async def server_card_handler(request):
     return JSONResponse({"error": "server-card.json not found"}, status_code=404)
 
 
-# Register routes on the Starlette ASGI application
-app.add_route("/", root_handler, methods=["GET"])
+# Register routes on the ASGI app
+app.add_route("/", root_dispatch, methods=["GET", "POST", "HEAD"])
 app.add_route("/.well-known/mcp/server-card.json", server_card_handler, methods=["GET"])
