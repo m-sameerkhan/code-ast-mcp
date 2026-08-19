@@ -2,7 +2,7 @@
 
 [![Model Context Protocol](https://img.shields.io/badge/MCP-Server-blue.svg)](https://modelcontextprotocol.io)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-brightgreen.svg)](https://python.org)
-[![Glama MCP](https://glama.ai/mcp/servers/badge)](https://glama.ai/mcp/servers/m-sameerkhan/code-ast-mcp)
+[![Glama MCP](https://img.shields.io/badge/Glama-MCP_Server-00d992.svg)](https://glama.ai/mcp/servers/m-sameerkhan/code-ast-mcp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **`code-ast-mcp`** is an architectural Model Context Protocol (MCP) server built with Python's native Abstract Syntax Tree (`ast`) parser. It allows AI models (in Claude Desktop, Cursor, Antigravity, or custom MCP clients) to analyze Python codebase structures, search symbol definitions, build dependency graphs, audit docstring coverage, and refactor code **without loading entire raw source files into LLM context windows**.
