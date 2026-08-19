@@ -1,0 +1,5 @@
+# Core dependencies for code-ast-mcp
+mcp>=1.2.0,<2.0.0
+
+# Development and testing dependencies
+pytest>=8.0.0

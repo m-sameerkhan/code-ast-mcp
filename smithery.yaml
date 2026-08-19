@@ -1,0 +1,10 @@
+# Smithery configuration file
+# https://smithery.ai
+$schema: https://smithery.ai/schema/v1/smithery.json
+startCommand:
+  type: stdio
+  config:
+    command: python
+    args:
+      - "-m"
+      - "code_ast_mcp.server"
