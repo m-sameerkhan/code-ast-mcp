@@ -1,0 +1,60 @@
+{
+  "manifest_version": "0.3",
+  "name": "code-ast-mcp",
+  "display_name": "Code AST Inspector",
+  "version": "0.1.0",
+  "description": "A Python AST-powered codebase inspector MCP server. Analyze Python files, search symbols, map import dependencies, and audit docstring coverage — without loading raw source files into LLM context.",
+  "long_description": "**code-ast-mcp** uses Python's native Abstract Syntax Tree (`ast`) parser to give AI models structured access to your codebase.\n\n## Tools\n- `analyze_file_ast` — Parse a `.py` file and return a clean outline of imports, classes, functions, and docstrings.\n- `find_class_methods` — Locate a specific class and retrieve its method signatures, type annotations, and docstrings.\n- `find_symbol` — Recursively search a directory for any class, function, method, or variable by name.\n- `get_imports_graph` — Build an import dependency map and output a Mermaid diagram.\n- `find_missing_docstrings` — Audit docstring coverage across your entire codebase.\n\n## Prompts\n- `refactor_code_summary` — Generate an AI-guided code review and refactoring plan from the AST outline.\n\n## Resources\n- `codeast://stats` — Live workspace statistics (files scanned, docstring coverage %, missing items).",
+  "author": {
+    "name": "m-sameerkhan",
+    "email": "sameerbalouch758@gmail.com",
+    "url": "https://github.com/m-sameerkhan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/m-sameerkhan/code-ast-mcp.git"
+  },
+  "homepage": "https://github.com/m-sameerkhan/code-ast-mcp",
+  "documentation": "https://github.com/m-sameerkhan/code-ast-mcp#readme",
+  "support": "https://github.com/m-sameerkhan/code-ast-mcp/issues",
+  "license": "MIT",
+  "keywords": ["ast", "python", "code-analysis", "mcp", "static-analysis", "docstrings", "refactoring"],
+  "server": {
+    "type": "python",
+    "entry_point": "code_ast_mcp/server.py",
+    "mcp_config": {
+      "command": "python",
+      "args": ["-m", "code_ast_mcp.server"],
+      "env": {}
+    }
+  },
+  "tools": [
+    {
+      "name": "analyze_file_ast",
+      "description": "Parse a Python file and return a structured AST outline including imports, classes, functions, variables, and docstrings."
+    },
+    {
+      "name": "find_class_methods",
+      "description": "Locate a specific class within a Python file and retrieve all its method signatures, type annotations, line numbers, and docstrings."
+    },
+    {
+      "name": "find_symbol",
+      "description": "Recursively search a directory or file for classes, functions, methods, or variables matching a target symbol name."
+    },
+    {
+      "name": "get_imports_graph",
+      "description": "Scan all Python files in a directory to build an import dependency map and output a Mermaid diagram."
+    },
+    {
+      "name": "find_missing_docstrings",
+      "description": "Audit Python files in a directory to identify modules, classes, and functions that lack docstrings, and calculate overall docstring coverage percentage."
+    }
+  ],
+  "tools_generated": true,
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "python": ">=3.10"
+    }
+  }
+}
