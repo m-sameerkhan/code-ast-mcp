@@ -2,14 +2,13 @@
 
 [![Model Context Protocol](https://img.shields.io/badge/MCP-Server-blue.svg)](https://modelcontextprotocol.io)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-brightgreen.svg)](https://python.org)
-[![Vercel Serverless](https://img.shields.io/badge/Vercel-Deployable-black.svg)](https://vercel.com)
-[![Smithery Server](https://img.shields.io/badge/Smithery-sameerbalouch758%2Fcode--ast--mcp-orange.svg)](https://smithery.ai/servers/sameerbalouch758/code-ast-mcp)
+[![Glama MCP](https://glama.ai/mcp/servers/badge)](https://glama.ai/mcp/servers/m-sameerkhan/code-ast-mcp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **`code-ast-mcp`** is an architectural Model Context Protocol (MCP) server built with Python's native Abstract Syntax Tree (`ast`) parser. It allows AI models (in Claude Desktop, Cursor, Antigravity, or custom MCP clients) to analyze Python codebase structures, search symbol definitions, build dependency graphs, audit docstring coverage, and refactor code **without loading entire raw source files into LLM context windows**.
 
 🔗 **Live Repository**: [https://github.com/m-sameerkhan/code-ast-mcp](https://github.com/m-sameerkhan/code-ast-mcp)  
-🔗 **Smithery Registry**: [https://smithery.ai/servers/sameerbalouch758/code-ast-mcp](https://smithery.ai/servers/sameerbalouch758/code-ast-mcp)
+🔗 **Glama Registry**: [https://glama.ai/mcp/servers/m-sameerkhan/code-ast-mcp](https://glama.ai/mcp/servers/m-sameerkhan/code-ast-mcp)
 
 ---
 
@@ -40,25 +39,27 @@
 
 ## 🚀 Deployment & Usage Modes
 
-### Mode 1: Cloud Serverless Deployment (Vercel + SSE)
+### Mode 1: Deploy via Glama MCP Registry
 
-Deploy `code-ast-mcp` as a live Server-Sent Events (SSE) streamable HTTP service on **Vercel**:
+Deploy `code-ast-mcp` to the **[Glama MCP Registry](https://glama.ai/mcp/servers)** — Glama automatically clones your GitHub repo, builds it using the included `Dockerfile`, and hosts it with built-in OAuth 2.1, monitoring, and access control.
 
-#### 1-Click Deploy via Vercel:
-1. Go to [vercel.com/new](https://vercel.com/new).
-2. Import repository `m-sameerkhan/code-ast-mcp`.
-3. Click **Deploy**.
+#### Steps:
+1. Go to [glama.ai/mcp/servers](https://glama.ai/mcp/servers).
+2. Click **"Add Server"**.
+3. Authenticate with **GitHub OAuth** (you must have write access to the repo).
+4. Submit the repository URL:
+   ```text
+   https://github.com/m-sameerkhan/code-ast-mcp
+   ```
+5. Glama will **auto-build** using the `Dockerfile` and verify MCP compliance.
+6. Once the build succeeds, your server will be live on the Glama registry.
 
-#### Or Deploy via Vercel CLI:
-```bash
-vercel --prod
-```
-
-#### Connect to Smithery:
-Once deployed, submit your Vercel endpoint to [Smithery](https://smithery.ai/new):
+#### Registry URL:
 ```text
-https://YOUR-APP-NAME.vercel.app/sse
+https://glama.ai/mcp/servers/m-sameerkhan/code-ast-mcp
 ```
+
+> **Note**: No manual hosting required — Glama handles building, deployment, and verification automatically.
 
 ---
 
@@ -100,17 +101,6 @@ pip install -e .
 
 ---
 
-### Mode 3: Package as an MCP Bundle (`.mcpb`)
-
-For desktop clients that support MCP Bundles:
-
-```bash
-npm install -g @anthropic-ai/mcpb
-mcpb pack . code-ast-mcp.mcpb
-```
-
----
-
 ## 🧪 Testing Locally
 
 ### Run Unit Tests
@@ -129,21 +119,13 @@ npx @modelcontextprotocol/inspector python -m code_ast_mcp.server
 
 ```text
 code-ast-mcp/
-├── api/                   # Vercel Serverless deployment
-│   └── index.py           # Starlette ASGI app (SSE / Streamable HTTP)
 ├── code_ast_mcp/          # Core MCP package
 │   ├── __init__.py        # Package exports
 │   ├── analyzer.py        # Python AST parsing & static analysis engine
 │   └── server.py          # FastMCP server definition & tool handlers
 ├── tests/                 # Test suite
 │   └── test_analyzer.py   # Unit tests with pytest
-├── .well-known/           # MCP capability discovery
-│   └── mcp/
-│       └── server-card.json
-├── vercel.json            # Vercel deployment configuration
-├── manifest.json          # MCPB extension manifest
-├── smithery.yaml          # Smithery registry configuration
-├── Dockerfile             # Container image definition
+├── Dockerfile             # Container image definition (used by Glama)
 ├── pyproject.toml         # Packaging & metadata
 └── requirements.txt       # Dependencies
 ```
